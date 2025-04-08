@@ -15,7 +15,7 @@ function Header() {
         <NavLink to="/map" activeclassname="active">Map</NavLink>
         <NavLink to="/volunteer" activeclassname="active">Volunteer</NavLink>
         <NavLink to="/resources" activeclassname="active">Resources</NavLink>
-        <NavLink to="/notifications" activeclassname="active">Notifications</NavLink>
+        <NavLink to="/VolunteerFeedback" activeclassname="active">VolunteerFeedback</NavLink>
        
       </nav>
     

@@ -7,7 +7,7 @@ import ReportCrisis from './pages/ReportCrisis';
 import CrisisMap from './pages/CrisisMap';
 import Volunteer from './pages/Volunteer';
 import Resources from './pages/Resources';
-import Notifications from './pages/Notifications';
+import VolunteerFeedback from './pages/VolunteerFeedback';
  
 import './App.css';
 
@@ -23,7 +23,7 @@ function App() {
           <Route path="/map" element={<CrisisMap />} />
           <Route path="/volunteer" element={<Volunteer />} />
           <Route path="/resources" element={<Resources />} />
-          <Route path="/notifications" element={<Notifications />} />
+          <Route path="/VolunteerFeedback" element={<VolunteerFeedback />} />
         
         </Routes>
       </div>
