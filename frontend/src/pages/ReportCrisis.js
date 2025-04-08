@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Header from '../components/Header';
-import Footer from '../components/Footer';
 import './ReportCrisis.css';
 
 function ReportCrisis() {
@@ -53,8 +52,8 @@ function ReportCrisis() {
         </form>
         {message && <p className="message">{message}</p>}
       </div>
-      <Footer />
     </div>
+    
   );
 }
 

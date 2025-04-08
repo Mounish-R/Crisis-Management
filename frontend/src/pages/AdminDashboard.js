@@ -5,8 +5,14 @@ import './AdminDashboard.css';
 function AdminDashboard() {
   const [requests, setRequests] = useState([]);
   const [crises, setCrises] = useState([]);
+  const [authenticated, setAuthenticated] = useState(false);
+  const [passcode, setPasscode] = useState('');
+
+  const correctPasscode = '123'; // 🔐 You can change this as needed
 
   useEffect(() => {
+    if (!authenticated) return;
+
     const fetchRequests = async () => {
       try {
         const res = await fetch('http://localhost:5000/api/volunteers');
@@ -29,30 +35,26 @@ function AdminDashboard() {
 
     fetchRequests();
     fetchCrises();
-  }, []);
+  }, [authenticated]);
 
   const handleStatusChange = async (id, status) => {
     try {
       const volunteer = requests.find(r => r._id === id);
       if (!volunteer) return;
-  
-      const updatedVolunteer = {
-        ...volunteer,
-        status
-      };
-  
+
+      const updatedVolunteer = { ...volunteer, status };
+
       await fetch(`http://localhost:5000/api/volunteers/${id}/status`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updatedVolunteer)
       });
-  
+
       setRequests(requests.map(r => r._id === id ? updatedVolunteer : r));
     } catch (err) {
       console.error('Failed to update status:', err);
     }
   };
-  
 
   const handleCrisisAction = async (id, approved) => {
     try {
@@ -67,92 +69,85 @@ function AdminDashboard() {
     }
   };
 
+  const handleLogin = () => {
+    if (passcode === correctPasscode) {
+      setAuthenticated(true);
+    } else {
+      alert('Incorrect passcode!');
+    }
+  };
+
   return (
     <div>
       <Header />
-      <div className="admin-dashboard">
-
-        {/* Volunteer Table */}
-        <h2>Volunteer Requests</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Phone</th>
-              <th>Address</th>
-              <th>Crisis</th> {/* New Column */}
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {requests.map((req) => (
-              <tr key={req._id}>
-                <td>{req.name}</td>
-                <td>{req.email}</td>
-                <td>{req.phone}</td>
-                <td>{req.address}</td>
-                <td>{req.crisisName || 'N/A'}</td> {/* Show selected crisis */}
-                <td>{req.status || 'Pending'}</td>
-                <td>
-                  <button
-                    onClick={() => handleStatusChange(req._id, 'Approved')}
-                    className="approve-btn"
-                  >
-                    Approve
-                  </button>
-                  <button
-                    onClick={() => handleStatusChange(req._id, 'Rejected')}
-                    className="reject-btn"
-                  >
-                    Reject
-                  </button>
-                </td>
+      {!authenticated ? (
+        <form
+          className="passcode-screen"
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleLogin();
+          }}
+        >
+          <h2>Admin Passcode Required</h2>
+          <input
+            type="password"
+            placeholder="Enter passcode"
+            value={passcode}
+            onChange={(e) => setPasscode(e.target.value)}
+          />
+          <button type="submit">Enter</button>
+        </form>
+      ) : (
+        <div className="admin-dashboard">
+          <h2>Volunteer Requests</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th><th>Email</th><th>Phone</th><th>Address</th><th>Crisis</th><th>Status</th><th>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {requests.map((req) => (
+                <tr key={req._id}>
+                  <td>{req.name}</td>
+                  <td>{req.email}</td>
+                  <td>{req.phone}</td>
+                  <td>{req.address}</td>
+                  <td>{req.crisisName || 'N/A'}</td>
+                  <td>{req.status || 'Pending'}</td>
+                  <td>
+                    <button onClick={() => handleStatusChange(req._id, 'Approved')} className="approve-btn">Approve</button>
+                    <button onClick={() => handleStatusChange(req._id, 'Rejected')} className="reject-btn">Reject</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
 
-        {/* Pending Crises Table */}
-        <h2>Pending Crisis Reports</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Location</th>
-              <th>Severity</th>
-              <th>Description</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {crises.map((crisis) => (
-              <tr key={crisis._id}>
-                <td>{crisis.title}</td>
-                <td>{crisis.location}</td>
-                <td>{crisis.severity}</td>
-                <td>{crisis.description}</td>
-                <td>
-                  <button
-                    onClick={() => handleCrisisAction(crisis._id, true)}
-                    className="approve-btn"
-                  >
-                    Approve
-                  </button>
-                  <button
-                    onClick={() => handleCrisisAction(crisis._id, false)}
-                    className="reject-btn"
-                  >
-                    Reject
-                  </button>
-                </td>
+          <h2>Pending Crisis Reports</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Title</th><th>Location</th><th>Severity</th><th>Description</th><th>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-
-      </div>
+            </thead>
+            <tbody>
+              {crises.map((crisis) => (
+                <tr key={crisis._id}>
+                  <td>{crisis.title}</td>
+                  <td>{crisis.location}</td>
+                  <td>{crisis.severity}</td>
+                  <td>{crisis.description}</td>
+                  <td>
+                    <button onClick={() => handleCrisisAction(crisis._id, true)} className="approve-btn">Approve</button>
+                    <button onClick={() => handleCrisisAction(crisis._id, false)} className="reject-btn">Reject</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 }

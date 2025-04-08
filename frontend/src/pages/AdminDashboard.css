@@ -50,3 +50,44 @@
     background-color: #e53935;
   }
   
+  .passcode-screen {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 30px;
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .passcode-screen h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+  }
+  
+  .passcode-screen input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    margin-bottom: 15px;
+  }
+  
+  .passcode-screen button {
+    padding: 10px 25px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .passcode-screen button:hover {
+    background-color: #0056b3;
+  }
+  

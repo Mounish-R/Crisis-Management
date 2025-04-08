@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
-import Footer from '../components/Footer';
+import './Dashboard.css';
+import Weather from './Weather';
 
 function Dashboard() {
   const [approvedVolunteers, setApprovedVolunteers] = useState([]);
@@ -25,9 +26,11 @@ function Dashboard() {
   return (
     <div>
       <Header />
+      {/* Live Weather Section */}
+      <Weather />
       <main className="p-4">
-        <h2>User Dashboard</h2>
-        <p>Here are the approved volunteer requests:</p>
+       
+        <h3>Approved volunteer </h3>
 
         <table>
           <thead>
@@ -56,7 +59,6 @@ function Dashboard() {
           <p>No approved volunteers yet.</p>
         )}
       </main>
-      <Footer />
     </div>
   );
 }
