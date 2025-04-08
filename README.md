@@ -87,5 +87,3 @@ Crisis-Management/
 │   └── package.json
 │
 └── README.md
-
-
