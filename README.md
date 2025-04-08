@@ -36,3 +36,56 @@ A comprehensive web-based platform designed to improve the detection, management
 
 ## 📂 Project Structure
 
+Crisis-Management/
+├── backend/
+│   ├── models/
+│   │   ├── Crisis.js
+│   │   └── Volunteer.js
+│   ├── node_modules/
+│   ├── routes/
+│   │   ├── crises.js
+│   │   └── volunteers.js
+│   ├── package-lock.json
+│   ├── package.json
+│   └── server.js
+│
+├── frontend/
+│   ├── public/
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── Header.css
+│   │   │   └── Header.js
+│   │   ├── pages/
+│   │   │   ├── AdminDashboard.css
+│   │   │   ├── AdminDashboard.js
+│   │   │   ├── CrisisMap.css
+│   │   │   ├── CrisisMap.js
+│   │   │   ├── Dashboard.css
+│   │   │   ├── Dashboard.js
+│   │   │   ├── Home.css
+│   │   │   ├── Home.js
+│   │   │   ├── ReportCrisis.css
+│   │   │   ├── ReportCrisis.js
+│   │   │   ├── Resources.css
+│   │   │   ├── Resources.js
+│   │   │   ├── Volunteer.css
+│   │   │   ├── Volunteer.js
+│   │   │   ├── VolunteerFeedback.css
+│   │   │   ├── VolunteerFeedback.js
+│   │   │   ├── Weather.css
+│   │   │   └── Weather.js
+│   │   ├── App.css
+│   │   ├── App.js
+│   │   ├── App.test.js
+│   │   ├── index.css
+│   │   ├── index.js
+│   │   ├── logo.svg
+│   │   ├── reportWebVitals.js
+│   │   └── setupTests.js
+│   ├── .gitignore
+│   ├── package-lock.json
+│   └── package.json
+│
+└── README.md
+
+
