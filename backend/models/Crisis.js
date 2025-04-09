@@ -1,23 +1,14 @@
 // models/Crisis.js
 const mongoose = require('mongoose');
 
-const crisisSchema = new mongoose.Schema({
+const CrisisSchema = new mongoose.Schema({
   title: String,
+  description: String,
   location: String,
   severity: String,
-  description: String,
-  approved: { type: Boolean, default: false } // NEW
+  approved: { type: Boolean, default: false },
+  lat: Number,
+  lng: Number
 });
 
-module.exports = mongoose.model('Crisis', crisisSchema);
-// const mongoose = require('mongoose');
-
-// const volunteerSchema = new mongoose.Schema({
-//   name: String,
-//   email: String,
-//   phone: String,
-//   address: String,
-//   status: { type: String, default: 'Pending' }  // ← Add this!
-// });
-
-// module.exports = mongoose.model('Volunteer', volunteerSchema);
+module.exports = mongoose.model('Crisis', CrisisSchema);

@@ -35,3 +35,6 @@ button {
 button:hover {
   background-color: #0056b3;
 }
+
+/* Add this to index.css or App.css */
+@import url('https://unpkg.com/leaflet/dist/leaflet.css');
