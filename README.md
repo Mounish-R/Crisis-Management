@@ -9,20 +9,14 @@ A comprehensive web-based platform designed to improve the detection, management
 - 🔍 **Real-time Monitoring**
   - Continuously tracks live data to identify early signs of crises (e.g., floods, earthquakes).
 
-- 📢 **Automated Alert System**
-  - Instantly notifies relevant authorities and users when a potential threat is detected.
-
-- 📦 **Smart Resource Allocation**
-  - Optimizes the distribution of aid and emergency resources based on real-time data.
-
 - 🧭 **Volunteer Coordination**
   - Allows volunteers to register and participate in crisis response efforts.
 
-- 🧠 **Data Analysis & Visualization**
-  - Offers insightful analytics and visual dashboards for decision-makers.
-
 - 🌐 **Admin Dashboard**
   - Secure backend panel for managing volunteer data and monitoring crisis reports.
+
+- 🌦️ **Weather Safety Alerts**
+  - Provides real-time weather updates and safety tips to help communities prepare for extreme conditions.
 
 ---
 
