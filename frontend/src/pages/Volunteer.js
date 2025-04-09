@@ -1,4 +1,3 @@
-// Volunteer.js
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import './Volunteer.css';
@@ -10,7 +9,7 @@ const VolunteerRequest = () => {
     phone: '',
     address: '',
     availability: '',
-    crisisName: '' // New field added
+    crisisName: ''
   });
 
   const [crises, setCrises] = useState([]);
@@ -74,6 +73,20 @@ const VolunteerRequest = () => {
                 <p>{crisis.description}</p>
                 <p><strong>📍 Location:</strong> {crisis.location}</p>
                 <p><strong>🚨 Severity:</strong> {crisis.severity}</p>
+                {crisis.image && (
+                  <img
+                    src={`http://localhost:5000/${crisis.image}`}
+                    alt="Crisis"
+                    style={{
+                      width: '250px',
+                      height: '150px',
+                      objectFit: 'cover',
+                      borderRadius: '8px',
+                      marginTop: '10px'
+                    }}
+                    onError={(e) => (e.target.src = 'https://via.placeholder.com/250x150')}
+                  />
+                )}
               </li>
             ))
           ) : (
@@ -115,9 +128,6 @@ const VolunteerRequest = () => {
             onChange={handleChange}
             required
           />
-
-          {/* New Dropdown for Crisis Selection */}
-          
           <select
             name="crisisName"
             value={formData.crisisName}
@@ -131,7 +141,6 @@ const VolunteerRequest = () => {
               </option>
             ))}
           </select>
-
           <textarea
             name="availability"
             placeholder="Availability and Skills"
@@ -139,7 +148,6 @@ const VolunteerRequest = () => {
             onChange={handleChange}
             required
           ></textarea>
-
           <button type="submit">✅ Click here to Volunteer</button>
         </form>
       </div>

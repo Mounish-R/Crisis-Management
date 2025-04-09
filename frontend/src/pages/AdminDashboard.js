@@ -7,8 +7,10 @@ function AdminDashboard() {
   const [crises, setCrises] = useState([]);
   const [authenticated, setAuthenticated] = useState(false);
   const [passcode, setPasscode] = useState('');
+  const [showModal, setShowModal] = useState(false);
+  const [selectedImage, setSelectedImage] = useState('');
 
-  const correctPasscode = '123'; // 🔐 You can change this as needed
+  const correctPasscode = '123';
 
   useEffect(() => {
     if (!authenticated) return;
@@ -128,7 +130,7 @@ function AdminDashboard() {
           <table>
             <thead>
               <tr>
-                <th>Title</th><th>Location</th><th>Severity</th><th>Description</th><th>Actions</th>
+                <th>Title</th><th>Location</th><th>Severity</th><th>Description</th><th>Image</th><th>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -139,6 +141,28 @@ function AdminDashboard() {
                   <td>{crisis.severity}</td>
                   <td>{crisis.description}</td>
                   <td>
+                    {crisis.image ? (
+                      <>
+                        <img
+                          src={`http://localhost:5000/${crisis.image}`}
+                          alt="Crisis"
+                          style={{ width: '80px', height: '80px', objectFit: 'cover' }}
+                          onError={(e) => e.target.src = 'https://via.placeholder.com/80'}
+                        />
+                        <br />
+                        <button
+                          onClick={() => {
+                            setSelectedImage(`http://localhost:5000/${crisis.image}`);
+                            setShowModal(true);
+                          }}
+                          className="view-btn"
+                        >
+                          View
+                        </button>
+                      </>
+                    ) : 'No image'}
+                  </td>
+                  <td>
                     <button onClick={() => handleCrisisAction(crisis._id, true)} className="approve-btn">Approve</button>
                     <button onClick={() => handleCrisisAction(crisis._id, false)} className="reject-btn">Reject</button>
                   </td>
@@ -146,6 +170,15 @@ function AdminDashboard() {
               ))}
             </tbody>
           </table>
+
+          {showModal && (
+            <div className="modal-overlay" onClick={() => setShowModal(false)}>
+              <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                <img src={selectedImage} alt="Full Crisis" className="modal-img" />
+                <button onClick={() => setShowModal(false)} className="close-btn">Close</button>
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>

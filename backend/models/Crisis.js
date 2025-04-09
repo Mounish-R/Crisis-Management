@@ -8,7 +8,8 @@ const CrisisSchema = new mongoose.Schema({
   severity: String,
   approved: { type: Boolean, default: false },
   lat: Number,
-  lng: Number
+  lng: Number,
+  image: String
 });
 
 module.exports = mongoose.model('Crisis', CrisisSchema);

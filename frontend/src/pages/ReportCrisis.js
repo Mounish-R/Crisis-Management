@@ -1,3 +1,4 @@
+//ReportCrisis.js
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import './ReportCrisis.css';
@@ -10,25 +11,38 @@ function ReportCrisis() {
     description: '',
   });
 
+  const [image, setImage] = useState(null);
   const [message, setMessage] = useState('');
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleImageChange = (e) => {
+    setImage(e.target.files[0]);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const data = new FormData();
+    data.append('title', formData.title);
+    data.append('location', formData.location);
+    data.append('severity', formData.severity);
+    data.append('description', formData.description);
+    if (image) {
+      data.append('image', image);
+    }
+
     try {
       const res = await fetch('http://localhost:5000/api/crises', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
+        body: data
       });
       if (res.ok) {
         setMessage('Crisis reported successfully!');
         setFormData({ title: '', location: '', severity: '', description: '' });
+        setImage(null);
       } else {
         setMessage('Failed to report the crisis.');
       }
@@ -44,16 +58,19 @@ function ReportCrisis() {
       <div className="report-container">
         <h2>Report a Crisis</h2>
         <form onSubmit={handleSubmit}>
-          <input type="text" name="title" placeholder="Title" value={formData.title} onChange={handleChange} required />
+          <input type="text" name="title" placeholder="Name of the Crisis" value={formData.title} onChange={handleChange} required />
           <input type="text" name="location" placeholder="Location" value={formData.location} onChange={handleChange} required />
           <input type="text" name="severity" placeholder="Severity" value={formData.severity} onChange={handleChange} required />
           <textarea name="description" placeholder="Description" value={formData.description} onChange={handleChange} required></textarea>
+          
+          {/* Image Upload */}
+          <input type="file" accept="image/*" onChange={handleImageChange} />
+
           <button type="submit">Submit</button>
         </form>
         {message && <p className="message">{message}</p>}
       </div>
     </div>
-    
   );
 }
 
