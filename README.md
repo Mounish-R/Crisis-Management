@@ -27,3 +27,9 @@ A comprehensive web-based platform designed to improve the detection, management
 | React.js | Node.js | MongoDB  | Express.js, OpenWeatherMap API, Map APIs |
 
 ---
+
+<img width="1874" height="898" alt="image" src="https://github.com/user-attachments/assets/43003a15-f810-4a2f-ad12-155cc31d22e4" />
+<img width="1885" height="889" alt="image" src="https://github.com/user-attachments/assets/a5f3164f-075d-444c-8897-038c28359a46" />
+<img width="1858" height="884" alt="image" src="https://github.com/user-attachments/assets/3e930c78-1c8a-42b5-9419-8ab5b76c67b4" />
+
+
